@@ -181,8 +181,11 @@ def _process_system_size_col(soup: BeautifulSoup) -> pd.DataFrame:
         metadata_for_row['system_id'] = href_match.group(1)
 
         # Process title (lots of metadata in here!)
-        title, title_meta = row.attrs['title'].split('|')
-
+        if len(row.attrs['title'].split('|')) == 2:
+            title, title_meta = row.attrs['title'].split('|')
+        else:
+            _, title, title_meta = row.attrs['title'].split('|')
+            
         # Name and capacity
         p = re.compile('(.*) (\d+\.\d+kW)')
         title_match = p.match(title)

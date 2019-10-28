@@ -3,7 +3,7 @@ from datetime import timedelta
 
 
 BASE_URL = 'https://pvoutput.org'
-MAP_URL = os.path.join(BASE_URL, 'map.jsp')
+MAP_URL = "/".join([BASE_URL, 'map.jsp'])
 
 # Country codes used by PVOutput.org on, for example,
 # https://pvoutput.org/map.jsp.  Taken from

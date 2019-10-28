@@ -58,37 +58,37 @@ class PVOutput:
 
         # Set from config file if None
         for param_name in ['api_key', 'system_id']:
-            if getattr(self, param_name) is None:
-                try:
-                    param_value_from_config = _get_param_from_config_file(
-                        param_name, config_filename)
-                except Exception as e:
-                    msg = (
-                        'Error loading configuration parameter {param_name}'
-                        ' from config file {filename}.  Either pass'
-                        ' {param_name} into PVOutput constructor, or create'
-                        ' config file {filename}.  {exception}'.format(
-                            param_name=param_name,
-                            filename=CONFIG_FILENAME,
-                            exception=e))
-                    print(msg)
-                    _LOG.exception(msg)
-                    raise
-                setattr(self, param_name, param_value_from_config)
+            # if getattr(self, param_name) is None:
+            #     try:
+            #         param_value_from_config = _get_param_from_config_file(
+            #             param_name, config_filename)
+            #     except Exception as e:
+            #         msg = (
+            #             'Error loading configuration parameter {param_name}'
+            #             ' from config file {filename}.  Either pass'
+            #             ' {param_name} into PVOutput constructor, or create'
+            #             ' config file {filename}.  {exception}'.format(
+            #                 param_name=param_name,
+            #                 filename=CONFIG_FILENAME,
+            #                 exception=e))
+            #         print(msg)
+            #         _LOG.exception(msg)
+            #         raise
+            #     setattr(self, param_name, param_value_from_config)
             # Convert to strings
             setattr(self, param_name, str(getattr(self, param_name)))
 
         # Check for data_service_url
-        if self.data_service_url is None:
-            try:
-                self.data_service_url = _get_param_from_config_file(
-                    'data_service_url', config_filename)
-            except KeyError:
-                pass
+        # if self.data_service_url is None:
+        #     try:
+        #         self.data_service_url = _get_param_from_config_file(
+        #             'data_service_url', config_filename)
+        #     except KeyError:
+        #         pass
 
-        if self.data_service_url is not None:
-            if not self.data_service_url.strip('/').endswith('.org'):
-                raise ValueError("data_service_url must end in '.org'")
+        # if self.data_service_url is not None:
+        #     if not self.data_service_url.strip('/').endswith('.org'):
+        #         raise ValueError("data_service_url must end in '.org'")
 
     def search(self,
                query: str,
